@@ -3,8 +3,6 @@ package com.springboot.jpa.data.dto;
 import com.springboot.jpa.data.entity.Product;
 import lombok.*;
 
-import java.time.LocalDateTime;
-
 /**
  * JSON 요청을 받을 때 사용
  * mutable(변경 가능한) 구조 + 기본 생성자 + getter/setter → Jackson 호환
@@ -36,9 +34,7 @@ public class ProductDto {
         return Product.create(
                 this.name,
                 this.price,
-                this.stock,
-                LocalDateTime.now(),
-                LocalDateTime.now()
+                this.stock
         );
     }
 }

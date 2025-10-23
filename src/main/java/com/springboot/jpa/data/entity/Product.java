@@ -45,8 +45,8 @@ public class Product {
         데이터 유효성과 상태 변경에 대한 책임을 엔티티 내부가 가짐
      */
     //객체 생성
-    public static Product create(String name, int price, Integer stock, LocalDateTime createdAt, LocalDateTime updatedAt) {
-        return new Product(null, name, price, stock, createdAt, updatedAt);
+    public static Product create(String name, int price, Integer stock) {
+        return new Product(null, name, price, stock, null, null);
     }
 
     //상태 변경 (setter 대신)

@@ -14,7 +14,6 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.lang.reflect.Field;
-import java.time.LocalDateTime;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
@@ -23,6 +22,17 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+/**
+ * 컨트롤러 테스트 : @~Test 어노테이션 필요
+ * 컨트롤러는 스프링 MVC 프레임워크와 연동되어 동작함
+ * 스프링이 관여하는 부분
+ * 요청 매핑: @GetMapping, @PostMapping 같은 어노테이션 해석
+ * RequestBody / PathVariable / RequestParam 바인딩
+ * Validation / ExceptionHandler
+ * Response 변환: 객체 → JSON (@RestController)
+ * 스프링 DI: 서비스, 레포지토리 주입
+ */
 
 /**
  * @WebMvcTest - 슬라이스 테스트
@@ -44,7 +54,7 @@ public class ProductControllerTest {
         //given
 
         //Entity에 setter메서드를 넣어주지 않았으므로 미리 생성후 willReturn에 대입
-        Product product = Product.create("pen", 5000, 2000, LocalDateTime.now(), LocalDateTime.now());
+        Product product = Product.create("pen", 5000, 2000);
         //number 값 직접 넣어주기
         Field numberField = Product.class.getDeclaredField("number");
         numberField.setAccessible(true);
