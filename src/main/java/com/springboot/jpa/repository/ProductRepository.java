@@ -21,8 +21,10 @@ public interface ProductRepository {
     Product selectProduct(Long number);
 
     //업데이트 로직에서 검증 실패나 다른 처리 문제 발생 가능 -> 체크 예외
-    Product updateProduct(Long number, String name) throws Exception;
+    Product updateProduct(Long number, String name);
 
     //삭제하려는 엔티티가 존재하지 않거나 DB오류 발생 가능하므로 체크 예외 선언
-    void deleteProduct(Long number) throws Exception;
+    void deleteProduct(Long number);
+
+    Product saveAndFlushProduct(Product product);
 }

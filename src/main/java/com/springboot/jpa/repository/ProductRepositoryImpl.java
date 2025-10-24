@@ -3,11 +3,9 @@ package com.springboot.jpa.repository;
 import com.springboot.jpa.data.entity.Product;
 import com.springboot.jpa.data.repository.ProductJpaRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -34,7 +32,7 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     @Transactional
     @Override
-    public Product updateProduct(Long number, String name) throws Exception {
+    public Product updateProduct(Long number, String name) {
         Product product = productJpaRepository.findById(number).orElseThrow(NoSuchElementException::new);
         product.updateProduct(name);
         //@Transactional을 붙이면 엔티티의 내용이 변경되면 Dirty Checking 발생 -> 자동으로 save. 즉 save 메서드를 쓸 필요 없음
@@ -45,8 +43,13 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
-    public void deleteProduct(Long number) throws Exception {
+    public void deleteProduct(Long number) {
         Product selectedProduct = productJpaRepository.findById(number).orElseThrow(NoSuchElementException::new);
         productJpaRepository.delete(selectedProduct);
+    }
+
+    @Override
+    public Product saveAndFlushProduct(Product product) {
+        return productJpaRepository.saveAndFlush(product);
     }
 }
